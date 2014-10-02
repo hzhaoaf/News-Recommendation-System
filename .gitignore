@@ -1,6 +1,5 @@
 ._*
-data/data.txt
-data/demo.csv
+data/
 .swap
 .pyc
 .idea/

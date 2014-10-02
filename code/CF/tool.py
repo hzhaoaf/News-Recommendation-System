@@ -2,14 +2,25 @@
 
 __author__ = 'wangjz'
 
-'''
-计算Jaccard距离，
-【输入】两个位向量
-【输入】J(A,B) = |A交B|/|A并B|
-'''
+
+def print_matrix(mat):
+    """
+    打印矩阵
+    """
+    for row in mat:
+        for ele in row:
+            print "%.2f\t" % ele,
+        print "\n"
+
 
 
 def jaccard_distance(l1, l2):
+    """
+    计算Jaccard距离，
+    【输入】两个位向量
+    【输入】J(A,B) = |A交B|/|A并B|
+    """
+
     union_num = 0
     intersect_num = 0
     for i in range(len(l1)):

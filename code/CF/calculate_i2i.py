@@ -2,7 +2,7 @@
 
 __author__ = 'wangjz'
 
-from tool import jaccard_distance
+from tool import jaccard_distance, print_matrix
 
 '''
 根据user_item矩阵 计算 i2i相似度矩阵
@@ -19,10 +19,11 @@ def calculate_i2i(ui_matrix, similar_method=jaccard_distance):
     N = len(ui_matrix[0])
     i2i_matrix = [[0 for col in range(N)] for row in range(N)]
     for i in range(N):
+        item_i = [u[i] for u in ui_matrix]
         for j in range(i+1, N):
-            item_i = [u[i] for u in ui_matrix]
             item_j = [u[j] for u in ui_matrix]
             i2i_matrix[i][j] = similar_method(item_i, item_j)
+            i2i_matrix[j][i] = i2i_matrix[i][j]
     return i2i_matrix
 
 
@@ -30,4 +31,4 @@ ui_mat =[[1,0,0,1],
         [1,1,1,1],
         [0,0,1,1]]
 i2i_mat = calculate_i2i(ui_mat)
-print(i2i_mat)
+print_matrix(i2i_mat)

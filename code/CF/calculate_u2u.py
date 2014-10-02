@@ -2,7 +2,7 @@
 
 __author__ = 'wangjz'
 
-from tool import jaccard_distance
+from tool import jaccard_distance, print_matrix
 
 '''
 根据user_item矩阵 计算 u2u相似度矩阵
@@ -15,6 +15,7 @@ def calculate_u2u(ui_matrix, similar_method=jaccard_distance):
     for i in range(M):
         for j in range(i+1, M):
             u2u_matrix[i][j] = similar_method(ui_matrix[i], ui_matrix[j])
+            u2u_matrix[j][i] = u2u_matrix[i][j]
     return u2u_matrix
 
 
@@ -22,4 +23,4 @@ ui_mat =[[1,0,0,1],
         [1,1,1,1],
         [0,0,1,1]]
 u2u_mat = calculate_u2u(ui_mat)
-print(u2u_mat)
+print_matrix(u2u_mat)

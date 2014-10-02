@@ -15,13 +15,13 @@ from tool import jaccard_distance, print_matrix
 '''
 
 
-def calculate_i2i(ui_matrix, similar_method=jaccard_distance):
-    N = len(ui_matrix[0])
+def calculate_i2i(clk_matrix, similar_method=jaccard_distance):
+    N = len(clk_matrix[0])
     i2i_matrix = [[0 for col in range(N)] for row in range(N)]
     for i in range(N):
-        item_i = [u[i] for u in ui_matrix]
+        item_i = [u[i] for u in clk_matrix]
         for j in range(i+1, N):
-            item_j = [u[j] for u in ui_matrix]
+            item_j = [u[j] for u in clk_matrix]
             i2i_matrix[i][j] = similar_method(item_i, item_j)
             i2i_matrix[j][i] = i2i_matrix[i][j]
     return i2i_matrix

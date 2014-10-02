@@ -5,7 +5,7 @@ __author__ = 'wangjz'
 
 def calculate_F(recommend, reality):
     """
-    计算调和均值F
+    计算precision,recall,调和均值F
 
     【recommend】 userid,newsid 一对多
     [(35,100647112),

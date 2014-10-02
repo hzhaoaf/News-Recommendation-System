@@ -3,3 +3,4 @@ data/data.txt
 data/demo.csv
 .swap
 .pyc
+.idea/

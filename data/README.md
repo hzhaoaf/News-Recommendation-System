@@ -9,4 +9,4 @@ DATA
 3. i2o.pickle 以下这四个都是翻译文件 来自 /code/experiment/generateTranslateDic.py的输出
 4. o2i.pickle
 5. o2u.pickle
-6. u2o_dic.pickle
+6. u2o.pickle

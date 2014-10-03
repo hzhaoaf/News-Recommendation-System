@@ -2,6 +2,7 @@
 
 __author__ = 'wangjz'
 
+from CONSTANT import *
 
 """
 【注意，我将data.txt文件头部插入了一行，否则读取出问题，原因未知】
@@ -9,9 +10,10 @@ __author__ = 'wangjz'
 读取文件，生成user<->order 和 news<->order 双向翻译字典
 序列化到文件里
 """
+#-----------------Step 1: read and parse-----------------#
 
-FILE_PATH = '../../data/data.txt'
-with open(FILE_PATH, 'r') as f:
+
+with open(ORIGIN_DATA_PATH, 'r') as f:
     lines = f.readlines()[1:]#为啥从第一行读就有错误？
 f.close()
 user_set = set()
@@ -39,21 +41,18 @@ for j in range(len(news_list)):
     i2o_dic[news_list[j]] = j
     o2i_dic[j] = news_list[j]
 
+#-----------------Step 2: save on disk-----------------#
 
-import pickle
-u2o_path = '../../data/u2o_dic.pickle'
-i2o_path = '../../data/i2o.pickle'
-o2u_path = '../../data/o2u.pickle'
-o2i_path = '../../data/o2i.pickle'
+import cPickle
 
-with open(u2o_path, 'wb') as f:
-    pickle.dump(u2o_dic, f)
+with open(U2O_PATH, 'wb') as f:
+    cPickle.dump(u2o_dic, f)
 
-with open(i2o_path, 'wb') as f:
-    pickle.dump(i2o_dic, f)
+with open(I2O_PATH, 'wb') as f:
+    cPickle.dump(i2o_dic, f)
 
-with open(o2u_path, 'wb') as f:
-    pickle.dump(o2u_dic, f)
+with open(O2U_PATH, 'wb') as f:
+    cPickle.dump(o2u_dic, f)
 
-with open(o2i_path, 'wb') as f:
-    pickle.dump(o2i_dic, f)
+with open(O2I_PATH, 'wb') as f:
+    cPickle.dump(o2i_dic, f)

@@ -3,6 +3,16 @@
 __author__ = 'wangjz'
 
 
+def print_range_matrix(mat, row_start, row_end, col_start, col_end):
+    """
+    打印矩阵范围内的数
+    """
+    for row in mat[row_start:row_end]:
+        for ele in row[col_start:col_end]:
+            print "%.2f\t" % ele,
+        print "\n"
+
+
 def print_matrix(mat):
     """
     打印矩阵

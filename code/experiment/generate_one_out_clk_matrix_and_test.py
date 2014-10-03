@@ -9,6 +9,7 @@ __author__ = 'wangjz'
 
 from CONSTANT import *
 import cPickle
+from scipy.sparse import lil_matrix
 
 # Step 1 : load origin data and translate dics
 
@@ -27,7 +28,8 @@ M_USERs = len(u2o_dic.items())
 N_NEWs = len(i2o_dic.items())
 
 # (M X N)的一个矩阵，一行代表一个用户，一列代表一条新闻
-ont_out_clk_matrix = [[int(0) for col in range(N_NEWs)] for row in range(M_USERs)]
+# ont_out_clk_matrix = [[int(0) for col in range(N_NEWs)] for row in range(M_USERs)]
+ont_out_clk_matrix = lil_matrix((M_USERs, N_NEWs))
 
 one_out_test_data = [] #训练集
 users_order_set = set() #记录已经出现的用户
@@ -41,7 +43,7 @@ for l in lines:
     user_order = u2o_dic[user_id]
     item_order = i2o_dic[item_id]
     if user_order in users_order_set:
-        ont_out_clk_matrix[user_order][item_order] = int(1)
+        ont_out_clk_matrix[user_order, item_order] = 1.0
     else:
         one_out_test_data.append((user_id, item_id))
         users_order_set.add(user_order)

@@ -4,7 +4,6 @@ __author__ = 'wangjz'
 
 import heapq
 import itertools
-import numpy as np
 
 class UBCFilter:
     """
@@ -46,7 +45,7 @@ class UBCFilter:
         通过相似矩阵，计算某个item最为相似的K个 用户(或新闻)
         返回值形如[(8, 0), (5, 2), (3, 1), (1, 3)]，第一列是相似度，第二列是用户号索引
         """
-        row = self.__u2u_matrix[target_index].todense().tolist()[0]
+        row = self.__u2u_matrix[target_index]
 
         #按说应该多召回一个，删除第一个(因为第一个是自己)
 
@@ -68,7 +67,7 @@ class UBCFilter:
                 for j in range(self.__N_NEWS):
                     #只计算当前用户没有阅读过的文章
                     if cur_read[j] == 0:
-                        news_ratings[j] += self.__u2u_matrix[i, index] * tmp_read[j]
+                        news_ratings[j] += similar * tmp_read[j]
 
             top = self.__get_top_l(news_ratings)
             print top

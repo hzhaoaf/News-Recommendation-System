@@ -38,8 +38,6 @@ def calculate_F(recommend, reality):
     return (precision, recall,F)
 
 
-
-
 rec = [(1,2),
        (1,3),
        [1,4],

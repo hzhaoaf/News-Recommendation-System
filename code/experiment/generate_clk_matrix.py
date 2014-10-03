@@ -2,6 +2,10 @@
 
 __author__ = 'wangjz'
 
+"""
+生成 user->news 的click 矩阵，使用全体信息
+"""
+
 from CONSTANT import *
 import cPickle
 

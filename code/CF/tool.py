@@ -2,6 +2,8 @@
 
 __author__ = 'wangjz'
 
+import numpy as np
+
 
 def print_range_matrix(mat, row_start, row_end, col_start, col_end):
     """
@@ -23,23 +25,22 @@ def print_matrix(mat):
         print "\n"
 
 
-
-def jaccard_distance(l1, l2):
+def jaccard_distance(row1, row2):
     """
     计算Jaccard距离，
-    【输入】两个位向量
+    【输入】两个 稀疏矩阵的行
     【输入】J(A,B) = |A交B|/|A并B|
     """
+    l1_index = row1.nonzero()[1]
+    l2_index = row2.nonzero()[1]
 
-    union_num = 0
-    intersect_num = 0
-    for i in range(len(l1)):
-        if l1[i] == 1 and l2[i] == 1:
-            intersect_num += 1
-        if l1[i] == 1 or l2[i] == 1:
-            union_num += 1
+    intersect_num = np.intersect1d(l1_index, l2_index).size
+    if intersect_num == 0:
+        return 0
 
+    union_num = np.union1d(l1_index, l2_index).size
     if union_num == 0:
         return 0
+
     else:
         return 1.0 * intersect_num/union_num

@@ -4,7 +4,13 @@ __author__ = 'wangjz'
 
 """
 生成 user->news 的click 矩阵，使用全体信息
+为了节约空间，用稀疏矩阵表示
 """
+
+
+from scipy.sparse import lil_matrix
+import numpy as np
+from numpy.random import random
 
 from CONSTANT import *
 import cPickle
@@ -26,15 +32,14 @@ M_USERs = len(u2o_dic.items())
 N_NEWs = len(i2o_dic.items())
 
 # (M X N)的一个矩阵，一行代表一个用户，一列代表一条新闻
-clk_matrix = [[int(0) for col in range(N_NEWs)] for row in range(M_USERs)]
-
+clk_matrix = lil_matrix((M_USERs, N_NEWs))
 for l in lines:
     items = l.split('\t')
     user_id = int(items[0])
     item_id = int(items[1])
     user_order = u2o_dic[user_id]
     item_order = i2o_dic[item_id]
-    clk_matrix[user_order][item_order] = int(1)
+    clk_matrix[user_order, item_order] = 1.0
 
 # Step 3 : save on disk
 with open(CLK_MATRIX_PATH, 'wb') as f:

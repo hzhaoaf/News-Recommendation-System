@@ -2,7 +2,6 @@
 
 __author__ = 'wangjz'
 
-
 def calculate_F(recommend, reality):
     """
     计算precision,recall,调和均值F

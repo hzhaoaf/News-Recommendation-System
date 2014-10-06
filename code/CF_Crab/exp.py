@@ -38,7 +38,7 @@ from scikits.crab.recommenders.knn import UserBasedRecommender,ItemBasedRecommen
 
 
 #Build the model
-model = MatrixPreferenceDataModel(news_data_dic)
+model = MatrixBooleanPrefDataModel(news_data_dic)
 
 #Build the similarity
 similarity = ItemSimilarity(model, pearson_correlation, num_best=10)

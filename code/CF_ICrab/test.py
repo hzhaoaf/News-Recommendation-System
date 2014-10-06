@@ -23,17 +23,15 @@ for l in lines:
 
 user_ids = news_data_dic.keys()
 
-from scikits.crab.models import MatrixPreferenceDataModel
-from scikits.crab.metrics import pearson_correlation
+from scikits.crab.models import MatrixPreferenceDataModel,MatrixBooleanPrefDataModel
+from scikits.crab.metrics import pearson_correlation,jaccard_coefficient,cosine_distances
 from improved_basic_similarities import ImprovedItemSimilarity
 from scikits.crab.recommenders.knn import ItemBasedRecommender
 
-
-model = MatrixPreferenceDataModel(news_data_dic)
-similarity = ImprovedItemSimilarity(model, pearson_correlation, num_best=10)
+model = MatrixBooleanPrefDataModel(news_data_dic)
+similarity = ImprovedItemSimilarity(model, jaccard_coefficient, num_best=10)
 similarity.compute_similarities()
 similarity.save_similar_dic(IMPROVE_SIMILARITY_PATH)
-
 
 # recommender = ItemBasedRecommender(model, similarity, with_preference=False)
 # result_list = []

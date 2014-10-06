@@ -19,4 +19,4 @@ REC_RESULT = DATA_PATH +  'recommend.pickle'
 
 COMMIT_RESULT_PATH = DATA_PATH + 'result.csv'
 
-IMPROVE_SIMILARITY_PATH = DATA_PATH + 'i_similar.pickle'
+IMPROVE_SIMILARITY_PATH = DATA_PATH + 'i_s'

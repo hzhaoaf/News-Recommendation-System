@@ -7,7 +7,6 @@ from scikits.crab.similarities.base import BaseSimilarity
 from scikits.crab.metrics import loglikehood_coefficient
 from scikits.crab.similarities.basic_similarities import find_common_elements
 
-import time
 
 class ImprovedItemSimilarity(BaseSimilarity):
     """
@@ -16,33 +15,42 @@ class ImprovedItemSimilarity(BaseSimilarity):
 
     def __init__(self, model, distance, num_best=None):
         BaseSimilarity.__init__(self, model, distance, num_best)
-        self.similar_dic = defaultdict(dict)
+        N = len(model.item_ids())
+        self.similar_matrix = [[0 for col in range(N)] for row in range(N)]
+        self.item2order_dic = defaultdict(int)
+        self.order2item_dic = defaultdict(str)
 
-    def save_similar_dic(self,path):
-        with open(path, 'w') as f:
-            cPickle.dump(self.similar_dic, f)
+    def save_similar_dic(self, path):
+        with open(path+"_similar_matrix.pickle", 'w') as f:
+            cPickle.dump(self.similar_matrix, f)
+        with open(path+"_item2order_dic.pickle", 'w') as f:
+            cPickle.dump(self.item2order_dic, f)
+        with open(path+"item2order_dic.pickle", 'w') as f:
+            cPickle.dump(self.item2order_dic, f)
 
     def load_similar_dic(self,path):
-        with open(path, 'r') as f:
-            self.similar_dic = cPickle.load(f)
+        with open(path+"_similar_matrix.pickle", 'w') as f:
+            self.similar_matrix = cPickle.load(f)
+        with open(path+"_item2order_dic.pickle", 'w') as f:
+            self.item2order_dic = cPickle.load(f)
+        with open(path+"item2order_dic.pickle", 'w') as f:
+            self.item2order_dic = cPickle.load(f)
 
     def compute_similarities(self):
-        self.similar_dic.clear()
+        self.similar_matrix.clear()
         item_ids = self.model.item_ids()
         n = len(item_ids)
+
         for i in range(n):
-            print item_ids[i],
-            start = time.clock()
+            self.item2order_dic[item_ids[i]] = i
+            self.order2item_dic[i] = item_ids[i]
+
+        for i in range(n):
+            print item_ids[i]
             for j in range(i+1, n):
-                tmp_distance = self.__pre_get_similarity(item_ids[i], item_ids[j])
-                self.similar_dic[item_ids[i]][item_ids[j]] = tmp_distance
-                # print item_ids[i], item_ids[j], tmp_distance
-            end = time.clock()
-            print(end - start)
-            # for itemj in self.similar_dic[item_ids[i]]:
-            #     ttt = self.similar_dic[item_ids[i]][itemj]
-            #     if ttt != 0:
-            #         print(item_ids[i], itemj, ttt)
+                tmp = self.__pre_get_similarity(item_ids[i], item_ids[j])
+                self.similar_matrix[i][j] = tmp
+                self.similar_matrix[j][i] = tmp
 
     def __pre_get_similarity(self, source_id, target_id):
         """

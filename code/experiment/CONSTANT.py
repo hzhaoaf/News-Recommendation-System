@@ -15,7 +15,7 @@ COS_U2U_SIM_MATRIX_PATH = DATA_PATH + 'cos_u2u_similarity.pickle'
 ONE_OUT_COS_U2U_SIM_MATRIX_PATH = DATA_PATH + 'one_out_cos_u2u_similarity.pickle'
 
 
-REC_RESULT = DATA_PATH +  'recommend.pickle'
+REC_RESULT = DATA_PATH + 'recommend.pickle'
 
 COMMIT_RESULT_PATH = DATA_PATH + 'result.csv'
 

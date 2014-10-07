@@ -1,6 +1,7 @@
 ._*
 data/
 .swap
+*.swp
 .pyc
 .idea/
 *.pyc

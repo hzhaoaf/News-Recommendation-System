@@ -14,9 +14,6 @@ ONE_OUT_TEST_DATA_PATH = DATA_PATH + 'one_out_test_data.pickle'
 COS_U2U_SIM_MATRIX_PATH = DATA_PATH + 'cos_u2u_similarity.pickle'
 ONE_OUT_COS_U2U_SIM_MATRIX_PATH = DATA_PATH + 'one_out_cos_u2u_similarity.pickle'
 
-
 REC_RESULT = DATA_PATH + 'recommend.pickle'
-
 COMMIT_RESULT_PATH = DATA_PATH + 'result.csv'
-
-IMPROVE_SIMILARITY_PATH = DATA_PATH + 'i_s'
+IMPROVE_SIMILARITY_PATH = DATA_PATH + 'i2i_similarity.pickle'

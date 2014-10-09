@@ -3,9 +3,11 @@
 __author__ = 'wangjz'
 
 import cPickle
-from CONSTANT import *
-from CF.cf_recommender import IBCFilter
+
 import numpy as np
+
+from CF.CONSTANT import *
+from CF.cf_recommender import IBCFilter
 
 
 with open(ONE_OUT_CLK_MATRIX_PATH, 'r') as f:

@@ -11,7 +11,7 @@ from CF.CONSTANT import *
 import cPickle
 from scipy.sparse import lil_matrix
 from scikits.crab.models import MatrixBooleanPrefDataModel
-from scikits.crab.metrics import jaccard_coefficient
+from scikits.crab.metrics import jaccard_coefficient,cosine_distances
 from CF.improved_basic_similarities import ImprovedItemSimilarity
 
 #[1] load data
@@ -51,6 +51,6 @@ with open(CLK_MATRIX_PATH, 'wb') as f:
     cPickle.dump(clk_matrix, f)
 
 model = MatrixBooleanPrefDataModel(cf_input_dic)
-similarity = ImprovedItemSimilarity(model, jaccard_coefficient, num_best=10)
+similarity = ImprovedItemSimilarity(model, cosine_distances, num_best=10)
 similarity.compute_similarities()
 similarity.save_similar_dic(IMPROVE_SIMILARITY_PATH)

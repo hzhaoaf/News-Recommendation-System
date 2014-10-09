@@ -35,7 +35,6 @@ class ImprovedItemSimilarity(BaseSimilarity):
             print item_orders[i]
             for j in range(i+1, n):
                 tmp = self.__pre_get_similarity(item_orders[i], item_orders[j])
-                print tmp,
                 self.similar_matrix[item_orders[i]][item_orders[j]] = tmp
                 self.similar_matrix[item_orders[j]][item_orders[i]] = tmp
 

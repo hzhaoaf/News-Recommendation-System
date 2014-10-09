@@ -3,6 +3,8 @@
     一些工具函数，辅助
 '''
 import time
+import logging
+
 import jieba
 
 data_dir = '/Users/huanzhao/projects/recommendation-system-contest/data/'
@@ -78,9 +80,20 @@ def test_stopwords():
     print list(stopwords)[2]
     print word in stopwords
 
+def log_matches(querystring, offset, pagesize, matches):
+    logger = logging.getLogger("xapian.search")
+    logger.info(
+        "'%s'[%i:%i] = %s",
+        querystring,
+        offset,
+        offset + pagesize,
+        ' '.join(str(docid) for docid in matches),
+        )
+
 def main():
     extract_title('newsid_title_map.txt', is_remove_stopwords=True)
     #test_stopwords()
+
 
 if __name__ == '__main__':
     main()

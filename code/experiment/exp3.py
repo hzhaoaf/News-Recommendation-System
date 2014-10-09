@@ -2,31 +2,27 @@
 
 __author__ = 'wangjz'
 
-from CONSTANT import *
+import cPickle
 
-with open(ORIGIN_DATA_PATH, 'r') as f:
-    lines = f.readlines()[1:]
+import numpy as np
 
-dict = {}
+from CF.CONSTANT import *
+from CF.cf_recommender import IBCFilter
 
-for l in lines:
-    items = l.split('\t')
-    user_id = int(items[0])
-    item_id = int(items[1])
-    if user_id in dict:
-        if len(dict[user_id]) == 1:
-            dict[user_id].append(item_id)
-    else:
-        dict[user_id] = [item_id]
 
-result = []
-for u,v in dict.items():
-    result.append((u,v[0]))
-    result.append((u,v[1]))
+with open(ONE_OUT_CLK_MATRIX_PATH, 'r') as f:
+    clk_matrix = cPickle.load(f)
 
-data = sorted(result, key=lambda x:x[0])
+clk_matrix = np.int16(clk_matrix.todense()).tolist()
+m = len(clk_matrix)
+n = len(clk_matrix[0])
 
-print "ok"
-with open(COMMIT_RESULT_PATH, 'w') as f:
-    for (u, v) in data:
-        f.write(str(u) + ',' + str(v) + '\n')
+i2i_matrix = [[0.5 for _ in range(n)] for _ in range(n)]#伪造i2i数据
+
+ #__init__(self, i2i_mat, clk_mat, k_nearest_item=100, l_top_rec=10):
+cf = IBCFilter(i2i_matrix, clk_matrix, k_nearest_item=5, l_top_rec=5)
+cf.start_cf()
+res = cf.result
+
+with open(REC_RESULT, 'wb') as f:
+    cPickle.dump(res, f)

@@ -7,9 +7,10 @@ __author__ = 'wangjz'
 用户浏览的最后一条news 作为测试集，其它作为训练集 one_out_clk_matrix
 """
 
-from CONSTANT import *
 import cPickle
+
 from scipy.sparse import lil_matrix
+from CF.CONSTANT import *
 
 # Step 1 : load origin data and translate dics
 

@@ -7,10 +7,12 @@ __author__ = 'wangjz'
 """
 
 import cPickle
-from CONSTANT import *
+
 from scipy.sparse import csr_matrix
-from CF.calculate_u2u import calculate_u2u_cos
 import numpy as np
+
+from CF.CONSTANT import *
+from other.calculate_u2u import calculate_u2u_cos
 
 
 def generate_u2u_similarity(input_matrix_file,output_file):

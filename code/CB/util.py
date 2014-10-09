@@ -9,6 +9,16 @@ data_dir = '/Users/huanzhao/projects/recommendation-system-contest/data/'
 train_data_path = data_dir + 'train_data.txt'
 stop_words_path = data_dir + 'stopwords_ch.txt'
 
+def unicode2str(str_):
+    if isinstance(str_, unicode):
+        return str_.encode('utf8')
+    return str_
+
+def str2unicode(str_):
+    if isinstance(str_, str):
+        return str_.decode('utf8')
+    return str_
+
 def load_stopwords():
     '''
         加载stopwords，返回停用词set
@@ -47,13 +57,15 @@ def extract_title(saved_file, is_remove_stopwords=False):
     fw.close()
     print 'res is saved in %s' % (saved_file)
 
-def text_segment(raw_text):
+def text_segment(raw_text, is_ret_utf8=False):
     '''
         调用jieba的分词，输入整句，返回list，每个元素为一个词
     '''
     try:
         segres = jieba.cut(raw_text)
         res =  list(segres)
+        if is_ret_utf8:
+            res = [unicode2str(r) for r in res]
         return [r for r in res if r.strip()]
     except Exception as e:
         print 'error occured in fenci: %s' % e

@@ -7,12 +7,12 @@ __author__ = 'wangjz'
 利用i2i相似度 进行Item Based CF
 """
 
-from CF.CONSTANT import *
+from CONSTANT import *
 import cPickle
 from scipy.sparse import lil_matrix
 from scikits.crab.models import MatrixBooleanPrefDataModel
 from scikits.crab.metrics import jaccard_coefficient
-from CF.improved_basic_similarities import ImprovedItemSimilarity
+from improved_basic_similarities import ImprovedItemSimilarity
 
 #[1] load data
 with open(ORIGIN_DATA_PATH, 'r') as f:

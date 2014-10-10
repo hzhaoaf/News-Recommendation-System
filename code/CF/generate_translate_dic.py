@@ -2,7 +2,7 @@
 
 __author__ = 'wangjz'
 
-from CF.CONSTANT import *
+from CONSTANT import *
 
 """
 【注意，我将data.txt文件头部插入了一行，否则读取出问题，原因未知】

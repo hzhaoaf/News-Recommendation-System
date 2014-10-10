@@ -7,7 +7,7 @@ __author__ = 'wangjz'
 利用i2i相似度 进行Item Based CF
 """
 
-from CF.CONSTANT import *
+from CONSTANT import *
 import cPickle
 import numpy as np
 from cf_recommender import IBCFilter

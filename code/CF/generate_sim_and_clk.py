@@ -3,8 +3,8 @@
 __author__ = 'wangjz'
 
 """
-执行计算的脚本
-利用i2i相似度 进行Item Based CF
+1）计算i2i 相似度，直接序列化
+2）生成点击矩阵，稀疏表示后进行序列化
 """
 
 from CONSTANT import *

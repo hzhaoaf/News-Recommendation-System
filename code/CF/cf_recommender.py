@@ -117,7 +117,7 @@ class IBCFilter:
             cur_read = self.__clk_matrix[user_order]
             total_read = 0
             for (news_index, ui_score) in enumerate(cur_read):
-                if ui_score == 0:
+                if ui_score < 0.000001:
                     continue
                 total_read += 1
                 near_items = self.__get_nearest_k(news_index)

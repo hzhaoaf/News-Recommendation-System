@@ -7,6 +7,7 @@
     4，对关键词进行统计，输出topN by frequency
 '''
 
+from util import print_map
 
 def generate_newsid2title_map(train_data_path):
     '''
@@ -96,16 +97,6 @@ def generate_user_topkeywords(train_data_path, user_read_list_path, user_topkeyw
 
     print '\nfinished, res saved in %s' % user_topkeywords_path
 
-def print_map(map_, limit=5):
-    info = []
-    for k, w in map_.items():
-        if isinstance(w, list):
-            w = '-'.join(w)
-        unit = '(%s, %s)' % (k, w)
-        info.append(unit)
-        if len(info) > limit:
-            break
-    print ','.join(info)
 
 def main():
     generate_user_topkeywords()

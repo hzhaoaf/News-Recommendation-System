@@ -20,6 +20,17 @@ def str2unicode(str_):
         return str_.decode('utf8')
     return str_
 
+def print_map(map_, limit=5):
+    info = []
+    for k, w in map_.items():
+        if isinstance(w, list):
+            w = '-'.join(w)
+        unit = '(%s, %s)' % (k, w)
+        info.append(unit)
+        if len(info) > limit:
+            break
+    print ','.join(info)
+
 
 def extract_title(saved_file, is_remove_stopwords=False):
     '''

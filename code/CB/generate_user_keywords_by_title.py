@@ -40,7 +40,11 @@ def generate_uid2newsids_map(user_read_list_path):
 
 def generate_user_keywords(uid2newsids_map, newsid2title_map):
     '''
-        完成step3
+        完成step3,
+        输出: [(uid1, [k1, k2, k1, k3]),
+               (uid2, [k1, k2, k1, k3]),
+               ...
+               ]
     '''
     print 'run generate_user_keywords...'
     user_keywords = []
@@ -60,6 +64,12 @@ def generate_top_keywords(user_keywords, user_topkeywords_path, topN):
     def get_keywords_cnt(keywords):
         '''
             传入一个keywords列表，统计次数，按照cnt降序返回(keyword, cnt)的list
+            输入: [k1, k2, k1, k3, ...]
+            输出: [(k1, n1),
+                   (k2, n2),
+                   ...
+                   ]
+                   n1 > n2 >...
         '''
         words_cnt = {}
         for kwd in keywords:
@@ -71,14 +81,14 @@ def generate_top_keywords(user_keywords, user_topkeywords_path, topN):
     for uid, keywords in user_keywords:
         #import pdb;pdb.set_trace()
         keywords_cnt = get_keywords_cnt(keywords)
-        user_topkeywords.append((uid, keywords_cnt))
+        user_topkeywords.append((uid, keywords_cnt[:topN]))
     #keywords的形式 (kwd, cnt)，这里排序是希望最后的user-topkeywords的结果
     #按照top 1的word的cnt降序排列，便于观察数据
     #user_topkeywords= sorted(user_topkeywords, key=lambda d: d[1][0][1], reverse=True)
 
     f = open(user_topkeywords_path, 'w+')
     for uid, keywords_cnt in user_topkeywords:
-        line = uid + '\t' + ','.join([kwd+'-'+str(cnt) for kwd, cnt in keywords_cnt[:topN]])
+        line = uid + '\t' + ','.join([kwd+'-'+str(cnt) for kwd, cnt in keywords_cnt])
         f.write(line + '\n')
     f.close()
 

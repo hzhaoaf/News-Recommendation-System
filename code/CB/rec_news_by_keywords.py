@@ -20,13 +20,14 @@ def get_user_keywords():
     '''
         从用户的关键词列表中获得keywords
         example: 5533175 克里米亚-1,感谢-1,何华章-1,官方-1,处置-1
+        输出: {uid:[k1, k2, k3, k4, k5],...}
     '''
     print 'run get_user_keywords, input: %s' % user_topkeywords_path
     lines = open(user_topkeywords_path, 'r+').readlines()
     user_keywords = {}
     for l in lines:
         parts = l.strip().split('\t')
-        uid = parts[0]
+        uid = parts[0].strip()
         keywords = [r.split('-')[0] for r in parts[1].split(',')]
         user_keywords[uid] = keywords
 
@@ -36,9 +37,9 @@ def get_user_keywords():
 def get_user_read_list():
     '''
         从user_read_list文件中读入每个用户的阅读历史，两个作用:
-        user_read_list每一行的样例: uid:N:newsid1,newsid2,
         1,从返回的结果中过滤掉这部分内容
         2,用来控制xapian中对每个用户的返回值结果
+        输入样例: uid:N:newsid1,newsid2,
         输出: {uid: [newid1, newsid2]}
     '''
     print 'run get_user_read_list, input: %s' % user_read_list_path
@@ -47,15 +48,14 @@ def get_user_read_list():
     for l in lines:
         parts = l.split(':')
         #如果用户阅读数小于等于10，则不给他推荐
-        if int(parts[1]) <= 10:
-            continue
-        uid = parts[0]
+        #if int(parts[1]) <= 10:
+        #    continue
+        uid = parts[0].strip()
         nids = parts[2].split(',')
         uid2newsids[uid] = nids
 
     print 'finish get user_read_list, example is\n %s ' % print_map(uid2newsids)
     return uid2newsids
-
 
 def get_recommend_news():
     '''
@@ -86,8 +86,8 @@ def get_recommend_news():
     f = open(recommend_res_path, 'w+')
     f.write('#userid,newsid\n')
     for uid, rec_news in rec_res:
-        f.write('\n'.join([','.join((uid, nid)) for nid in rec_news]))
-        f.write('\n')
+        line = '\n'.join([','.join((uid, nid)) for nid in rec_news])
+        f.write(line + '\n')
 
     f.close()
     print 'finish recommending, res saved in %s' % recommend_res_path
@@ -97,5 +97,4 @@ def run():
 
 if __name__ == '__main__':
     run()
-
 

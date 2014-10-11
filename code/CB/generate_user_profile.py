@@ -24,7 +24,7 @@ def generate_user_read_list(train_data_path, user_read_list_path):
     users_nids = {}
     while line:
         parts = line.strip().split('\t')
-        uid, newsid = parts[0], parts[1]
+        uid, newsid = parts[0].strip(), parts[1].strip()
         users_nids.setdefault(uid, []).append(newsid)
         line = f.readline()
     users_nids = sorted(users_nids.items(), key=lambda d:len(d[1]), reverse=True)

@@ -22,8 +22,8 @@ def segment_train_data(train_data_path, saved_original_file, saved_unique_file):
     '''
         包括对title和content的分词与去掉停用词
         生成两份文件:
-            1,和元数据结构保持一致的分词后结果;
-            2,去掉uid，将文章利用newsid进行消重,得到一份新的data，用来index中使用(unique_news)
+            1,和原数据结构保持一致的分词后结果;
+            2,将文章利用newsid进行消重,得到一份新的data，用来index中使用(unique_news)
     '''
     stopwords = load_stopwords()
     def filter_stopwords(words):
@@ -37,15 +37,16 @@ def segment_train_data(train_data_path, saved_original_file, saved_unique_file):
     while line:
         parts = line.strip().split('\t')
         original_news.append(parts)
-        if parts[1].strip() in newsids:
+        nid = parts[1].strip()
+        if  nid in newsids:
             line = f.readline()
             continue
-        newsids.add(parts[1].strip())
+        newsids.add(nid)
         cnt += 1
 
         parts[3] = unicode2str(' '.join(filter_stopwords(text_segment(parts[3], is_ret_utf8=True))))
         parts[4] = unicode2str(' '.join(filter_stopwords(text_segment(parts[4], is_ret_utf8=True))))
-        unique_news.append('\t\t'.join(parts))
+        unique_news.append('\t'.join(parts))
         nid2tc[parts[1]] = (parts[3], parts[4])
 
         if cnt % 1000 == 0:

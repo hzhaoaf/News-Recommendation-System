@@ -61,7 +61,6 @@ def index(index_file_path):
         if cnt % 1000 == 0:
             print 'finish %s articles' % str(cnt)
 
-
         content = fields.get('content', u'')
         title = fields.get('title', u'')
         timestamp = fields.get('ts', u'')#timestamp
@@ -79,17 +78,9 @@ def index(index_file_path):
 
         # Store all the fields for display purposes.
         doc.set_data(json.dumps(fields, encoding='utf8'))
-
         db.add_document(doc)
 
-        # We use the identifier to ensure each object ends up in the
-        # database only once no matter how many times we run the
-        # indexer.
-        #idterm = u"Q" + newsid
-        #doc.add_boolean_term(idterm)
-        #db.replace_document(idterm, doc)
     print 'finish indexing %s articles!' % cnt
-
 
 def main():
     index(index_file_path)

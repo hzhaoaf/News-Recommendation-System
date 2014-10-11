@@ -7,9 +7,8 @@ import logging
 
 import jieba
 
-data_dir = '/Users/huanzhao/projects/recommendation-system-contest/data/'
+data_dir = '/Users/huanzhao/projects/recommendation-system-contest/data/splited_train_data.txt'
 train_data_path = data_dir + 'train_data.txt'
-stop_words_path = data_dir + 'stopwords_ch.txt'
 
 def unicode2str(str_):
     if isinstance(str_, unicode):
@@ -21,14 +20,6 @@ def str2unicode(str_):
         return str_.decode('utf8')
     return str_
 
-def load_stopwords():
-    '''
-        加载stopwords，返回停用词set
-    '''
-    lines = open(stop_words_path, 'r').readlines()
-    stopwords = [l.strip() for l in lines if l]
-    print 'load stopwords, example: %s...' % (','.join(stopwords[:10]))
-    return set(stopwords)
 
 def extract_title(saved_file, is_remove_stopwords=False):
     '''

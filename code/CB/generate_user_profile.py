@@ -5,13 +5,11 @@
     2,根据不同的模型生成用户的keywords
 '''
 
-topN = 5
-data_dir = '/Users/huanzhao/projects/recommendation-system-contest/data/splited_data/'
-train_data_path = data_dir + 'segmented_train_data.txt'
-user_topkeywords_path = data_dir + 'uid2top%skeywords.txt' % topN
-user_read_list_path = data_dir + 'user_read_list.txt'
+from config import train_data_path, user_topkeywords_path, user_read_list_path
+from config import User_Keywords_topN as topN
 
 from generate_user_keywords_by_title import generate_user_topkeywords
+
 
 def generate_user_read_list(train_data_path, user_read_list_path):
     '''

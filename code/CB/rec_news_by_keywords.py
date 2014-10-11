@@ -4,17 +4,12 @@
     使用xapian进行检索，返回结果中，filter掉用户已经读过的，进行推荐
 '''
 
+from config import user_topkeywords_path, user_read_list_path
+from config import index_file_path, recommend_res_path
+from config import REC_NUM
+
 from util import print_map
 from search import search
-
-data_dir = '/Users/huanzhao/projects/recommendation-system-contest/data/splited_data/'
-user_topkeywords_path = data_dir + 'uid2top5keywords.txt'
-user_read_list_path = data_dir + 'user_read_list.txt'
-
-index_file_path = data_dir + 'index_file'
-
-REC_NUM = 3 # 控制最终给用户推荐的文章数
-recommend_res_path = data_dir + 'recommend_news.txt'
 
 def get_user_keywords():
     '''

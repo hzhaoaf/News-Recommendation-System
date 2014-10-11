@@ -12,8 +12,8 @@
 
 具体如下：
 
-	1.从训练集中获取用户阅读文章的标题，进行分词，去Stopwords，然后统计词频，返回TopN（=5）的词，即为
-	用户的keywords.(代码：generate_user_profile.py)
+	1.从训练集中获取用户阅读文章的标题，进行分词，去Stopwords，然后统计词频，返回TopN（=5）的词，即为用户的keywords.
+	(代码：generate_user_profile.py)
 	2.利用Xapian对所有的文章进行索引，目前一共索引4个fields：title, content, newsid, timestamp;当然，
 	title和content也都进行了分词和去停用词；(代码: index.py)
 	3.使用1中生成的user_keywords，到2中建立的索引里进行search，索引方式为: title:k1 content:k1

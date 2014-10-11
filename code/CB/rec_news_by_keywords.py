@@ -46,6 +46,9 @@ def get_user_read_list():
     uid2newsids = {}
     for l in lines:
         parts = l.split(':')
+        #如果用户阅读数小于等于10，则不给他推荐
+        if int(parts[1]) <= 10:
+            continue
         uid = parts[0]
         nids = parts[2].split(',')
         uid2newsids[uid] = nids
@@ -69,7 +72,9 @@ def get_recommend_news():
     rec_res = []
     for uid, keywords in user_keywords.items():
         if not keywords:
-            rec_res.append(uid, [])
+            #rec_res.append(uid, [])
+            continue
+        if uid not in uid2newsids:
             continue
         query_str = generate_query_str(keywords)
         read_news = set(uid2newsids.get(uid, []))
@@ -79,7 +84,7 @@ def get_recommend_news():
         rec_res.append((uid, user_rec_news[:REC_NUM]))
 
     f = open(recommend_res_path, 'w+')
-    f.write('userid,newsid\n')
+    f.write('#userid,newsid\n')
     for uid, rec_news in rec_res:
         f.write('\n'.join([','.join((uid, nid)) for nid in rec_news]))
         f.write('\n')

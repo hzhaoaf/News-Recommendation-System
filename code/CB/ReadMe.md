@@ -17,8 +17,8 @@
 	2.利用Xapian对所有的文章进行索引，目前一共索引4个fields：title, content, newsid, timestamp;当然，
 	title和content也都进行了分词和去停用词；(代码: index.py)
 	3.使用1中生成的user_keywords，到2中建立的索引里进行search，索引方式为: title:k1 content:k1
-	 title:k2 content:k2...返回结果数目为(用户阅读数+3)。然后将用户阅读的文章去掉，剩下的按照rank排序
-	 即为给用户的推荐结果。（代码：rec_news_by_keywords.py）
+	title:k2 content:k2...返回结果数目为(用户阅读数+3)。然后将用户阅读的文章去掉，剩下的按照rank排序
+	即为给用户的推荐结果。（代码：rec_news_by_keywords.py）
 	
 以上是主要的实现过程，代码库里还有一个preprocessing_data.py文件，这个是在一开始对训练集进行预处理，包括分词和去停用词，然后所有的操作都是基于预处理之后的训练集进行。
 

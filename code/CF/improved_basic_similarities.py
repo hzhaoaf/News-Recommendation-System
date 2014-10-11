@@ -33,7 +33,7 @@ class ImprovedItemSimilarity(BaseSimilarity):
         n = len(item_orders)
         for i in range(n):
             print item_orders[i]
-            for j in range(i+1, n):
+            for j in range(i+1, n):#（对角线熵都是0，自身和自身相比相似度为0）
                 tmp = self.__pre_get_similarity(item_orders[i], item_orders[j])
                 self.similar_matrix[item_orders[i]][item_orders[j]] = tmp
                 self.similar_matrix[item_orders[j]][item_orders[i]] = tmp

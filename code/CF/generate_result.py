@@ -22,15 +22,12 @@ N_NEWs = len(o2i_dic.items())
 with open(REC_RESULT, 'r') as f:
     recommends = cPickle.load(f)
 
-
+#每个用户推荐 几个？
+K_RECOMMEND = 4
 with open(FINAL_DATA, 'w') as f:
     for i in range(len(recommends)):
         user_id = o2u_dic[i]
-        item_id1 = o2i_dic[recommends[i][0][1]]
-        item_id2 = o2i_dic[recommends[i][1][1]]
-        item_id3 = o2i_dic[recommends[i][2][1]]
-
-        #[(0.12532051282051279, 2680), (0.11757917337627483, 2681), (0.09198717948717948, 6179)]
-        f.write(str(user_id) + ',' + str(item_id1) + "\n")
-        f.write(str(user_id) + ',' + str(item_id2) + "\n")
-        f.write(str(user_id) + ',' + str(item_id3) + "\n")
+        for j in range(K_RECOMMEND):
+            item_id = o2i_dic[recommends[i][j][1]]
+            #[(0.12532051282051279, 2680), (0.11757917337627483, 2681), (0.09198717948717948, 6179)]
+            f.write(str(user_id) + ',' + str(item_id) + "\n")

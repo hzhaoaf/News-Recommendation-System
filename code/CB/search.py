@@ -8,13 +8,11 @@ import xapian
 
 from util import log_matches
 
-data_dir = '/Users/huanzhao/projects/recommendation-system-contest/data/'
-index_file_path = data_dir + 'index_file'
 
 ### Start of example code.
-def search(index_file_path, querystring, offset=0, pagesize=10):
+def search(index_file_path, querystring, offset=0, ret_num=10):
     # offset - defines starting point within result set
-    # pagesize - defines number of records to retrieve
+    # ret_num- defines number of records to retrieve
 
     # Open the database we're going to search.
     db = xapian.Database(index_file_path)
@@ -29,28 +27,29 @@ def search(index_file_path, querystring, offset=0, pagesize=10):
     # And parse the query
     query = queryparser.parse_query(querystring)
 
-    print query
+    #print 'query in xapian is : ', query
 
     # Use an Enquire object on the database to run the query
     enquire = xapian.Enquire(db)
     enquire.set_query(query)
 
     # And print out something about each match
-    matches = []
-    for match in enquire.get_mset(offset, pagesize):
+    matches, ret_res = [], []
+    for match in enquire.get_mset(offset, ret_num):
         fields = json.loads(match.document.get_data())
-        print u"%(rank)i: #%(docid)3.3i, %(newsid)s %(title)s--%(content)s" % {
-            'rank': match.rank + 1,
-            'docid': match.docid,
-            'newsid': fields.get('newsid', u''),
-            'title': fields.get('title', u''),
-            'content': fields.get('content', u'')[:50],
-            }
-        matches.append(match.docid)
+        #print u"%(rank)i: #%(docid)3.3i, %(newsid)s %(title)s--%(content)s" % {
+        #    'rank': match.rank + 1,
+        #    'docid': match.docid,
+        #    'newsid': fields.get('newsid', u''),
+        #    'title': fields.get('title', u''),
+        #    'content': fields.get('content', u'')[:50],
+        #    }
+        #matches.append(match.docid)
+        ret_res.append(fields.get('newsid', '-1'))
 
     # Finally, make sure we log the query and displayed results
-    log_matches(querystring, offset, pagesize, matches)
-### End of example code.
+    log_matches(querystring, offset, ret_num, matches)
+    return ret_res
 
 def main():
     logging.basicConfig(level=logging.INFO)

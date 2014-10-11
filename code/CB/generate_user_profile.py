@@ -5,10 +5,9 @@
     2,根据不同的模型生成用户的keywords
 '''
 
-data_dir = '/Users/huanzhao/projects/recommendation-system-contest/data/splited_data/'
-
-train_data_path = data_dir + 'segmented_train_data.txt'
 topN = 5
+data_dir = '/Users/huanzhao/projects/recommendation-system-contest/data/splited_data/'
+train_data_path = data_dir + 'segmented_train_data.txt'
 user_topkeywords_path = data_dir + 'uid2top%skeywords.txt' % topN
 user_read_list_path = data_dir + 'user_read_list.txt'
 

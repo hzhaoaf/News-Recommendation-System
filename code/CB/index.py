@@ -7,27 +7,19 @@ import os
 import json
 import xapian
 
-from util import text_segment, load_stopwords
-
-data_dir = '/Users/huanzhao/projects/recommendation-system-contest/data/'
-train_data_path = data_dir + 'train_data.txt'
-segmenting_train_data_path = data_dir + 'train_data_with_segmenting.txt'
-stop_words_path = data_dir + 'stopwords_ch.txt'
+data_dir = '/Users/huanzhao/projects/recommendation-system-contest/data/splited_data/'
+train_data_path = data_dir + 'train_data_unique_nid.txt'
 index_file_path = data_dir + 'index_file'
 
 def parse_train_data(train_data_path):
     '''
-        读入训练集，生成待索引数据的list，每一个都是一个dict,
+        读入已经分词和消重后的训练集，生成待索引数据的list，每一个都是一个dict,
         key=index_name, value=index_text
         训练集中的title和content已经进行分词,并去掉停用词，所以直接读取即可
     '''
     f = open(train_data_path, 'r')
     line = f.readline()
     index_records = []
-    stopwords = load_stopwords()
-
-    def filter_stopwords(words):
-        return [r for r in words if r not in stopwords]
 
     cnt = 0
     while line:
@@ -36,16 +28,9 @@ def parse_train_data(train_data_path):
         #    break
         record = {}
         parts = line.strip().split('\t\t')
-        #newsid = parts[1]
-        #timestamp = parts[2]
-        #title = parts[3]
-        #content = parts[4]
 
-        #record['title'] = ' '.join(filter_stopwords(text_segment(parts[3], is_ret_utf8=True)))
         record['title'] = parts[3]
         record['content'] = parts[4]
-        #record['content'] = ' '.join(filter_stopwords(text_segment(parts[4], is_ret_utf8=True)))
-        #record['content'] = ' this is a test content%s' % str(cnt)
         record['ts'] = parts[2]
         record['newsid'] = parts[1]
         index_records.append(record)
@@ -70,7 +55,7 @@ def index(index_file_path):
     #termgenerator.set_stemmer(xapian.Stem("en"))
 
     cnt = 0
-    index_records = parse_train_data(segmenting_train_data_path)
+    index_records = parse_train_data(train_data_path)
     for fields in index_records:
         cnt += 1
         if cnt % 1000 == 0:
@@ -91,13 +76,6 @@ def index(index_file_path):
         termgenerator.index_text(content, 1, 'cn')
         termgenerator.index_text(newsid, 1, 'nid')
         termgenerator.index_text(timestamp, 1, 'ts')
-
-        # Index fields without prefixes for general search.
-        #termgenerator.index_text(title)
-        ##termgenerator.increase_termpos()
-        #termgenerator.index_text(content)
-        #termgenerator.index_text(newsid)
-        #termgenerator.index_text(timestamp)
 
         # Store all the fields for display purposes.
         doc.set_data(json.dumps(fields, encoding='utf8'))

@@ -5,7 +5,7 @@ __author__ = 'wangjz'
 from CONSTANT import *
 import cPickle
 import numpy as np
-
+import random
 
 with open(CLK_MATRIX_PATH, 'r') as f:
     clk_matrix = cPickle.load(f)
@@ -19,6 +19,8 @@ test_file = open(FM_TEST_DATA, 'w')
 
 ROW = len(clk_matrix)
 COL = len(clk_matrix[0])
+
+neg_list = []
 for i in range(ROW):
     for j in range(COL):
         #1 9745:1 540:1
@@ -26,7 +28,14 @@ for i in range(ROW):
         if clk_matrix[i][j] == 1:
             train_file.write("1 "+str(i)+":1 "+str(j)+":1\n")
         else:
-            test_file.write("0 "+str(i)+":1 "+str(j)+":1\n")
+            #随机的加入一些负样本
+            neg = "0 "+str(i)+":1 "+str(j)+":1\n"
+            test_file.write(neg)
+            neg_list.append(neg)
 
-train_file.close()
 test_file.close()
+
+random.shuffle(neg_list)
+for i in range(100000):
+    train_file.write(neg_list[i])
+train_file.close()

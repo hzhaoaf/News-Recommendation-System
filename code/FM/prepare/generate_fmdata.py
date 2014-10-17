@@ -1,12 +1,20 @@
 # -*- coding: utf-8 -*-
 
 __author__ = 'wangjz'
+"""
+生成lifm需要的训练集和测试集
+其中训练集中
+1）正例是全部阅读过的条目
+2）负样本是没有阅读过的条目中随机生成的
+
+测试集是全体的没有阅读过的条目
+
+"""
 
 from CONSTANT import *
 import cPickle
 import numpy as np
 import random
-
 with open(CLK_MATRIX_PATH, 'r') as f:
     clk_matrix = cPickle.load(f)
 

@@ -64,7 +64,7 @@ def run(recommend_res_file, golden_test_file):
 
     def load_items(items_file):
         lines = open(items_file, 'r').readlines()
-        return [l.strip() for l in lines if not l.startswith('#')]
+        return [l.strip() for l in lines][1:]#第一行去掉
 
     rec_items = load_items(recommend_res_file)
     gt_items = set(load_items(golden_test_file))

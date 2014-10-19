@@ -25,7 +25,7 @@ def parse_train_data(raw_data_path):
         #if cnt == 10:
         #    break
         record = {}
-        parts = line.strip().split('\t\t')
+        parts = line.strip().split('\t')
 
         record['title'] = parts[3]
         record['content'] = parts[4]

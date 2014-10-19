@@ -2,12 +2,25 @@
 '''
     存储实验中所有的配置信息，包括各种文件路径，以及TopN信息
 '''
+#控制使用哪一部分数据做实验，为true表示使用完全版的训练集
+use_contest_data = False
 
 #控制用户关键词的数目
 User_Keywords_topN = 5
 
 #总的目录
-data_dir = '/Users/huanzhao/projects/recommendation-system-contest/data/splited_data/'
+dir_ = '/Users/huanzhao/projects/recommendation-system-contest/data/'
+
+
+#不同实验对应的目录
+data_dir = dir_ + 'splited_data/'
+if use_contest_data:
+    data_dir = dir_ + 'contest_data/'
+
+
+#计算tfidf需要用到的文件
+corpus_path =  data_dir + 'train_data_unique_nid.txt'
+tfidf_dir = data_dir + 'tfidf_res/'
 
 #分词，去停用词后的训练集
 train_data_path = data_dir + 'segmented_train_data.txt'
@@ -28,4 +41,4 @@ indexed_file_path = data_dir + 'index_file'
 REC_NUM = 3
 
 #推荐结果
-recommend_res_path = data_dir + 'recommend_news.txt'
+recommend_res_path = data_dir + 'recommend_news.csv'

@@ -20,7 +20,8 @@ if use_contest_data:
 
 #计算tfidf需要用到的文件
 corpus_path =  data_dir + 'train_data_unique_nid.txt'
-tfidf_dir = data_dir + 'tfidf_res/'
+news_tfidf_dir = data_dir + 'tfidf_res/'
+user_keywords_by_tfidf = data_dir + 'user_keywords_by_tfidf/'
 
 #分词，去停用词后的训练集
 train_data_path = data_dir + 'segmented_train_data.txt'
@@ -40,5 +41,8 @@ indexed_file_path = data_dir + 'index_file'
 #控制最终给用户推荐的文章数
 REC_NUM = 3
 
+#通过时间和阅读历史过滤出的待推荐的文章合集
+user_candidate_newsids_path = data_dir + 'user_candidate_newsids.txt'
+
 #推荐结果
-recommend_res_path = data_dir + 'recommend_news.csv'
+recommend_res_path = data_dir + 'recommend_news_by_tfidf.csv'

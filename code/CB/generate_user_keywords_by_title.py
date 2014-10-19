@@ -8,6 +8,7 @@
 '''
 
 from util import print_map
+from user_util import generate_uid2newsids_map
 
 def generate_newsid2title_map(train_data_path):
     '''
@@ -24,19 +25,6 @@ def generate_newsid2title_map(train_data_path):
         newsid2title_map[parts[1]] = title_segments
     return newsid2title_map
 
-def generate_uid2newsids_map(user_read_list_path):
-    '''
-        完成step2
-    '''
-    print 'run generate_uid2newsids_map...'
-    uid2newsids_map = {}
-    f = open(user_read_list_path, 'r')
-    line = f.readline()
-    while line:
-        parts = line.strip().split(':')
-        uid2newsids_map[parts[0]] = parts[2].strip().split(',')
-        line = f.readline()
-    return uid2newsids_map
 
 def generate_user_keywords(uid2newsids_map, newsid2title_map):
     '''

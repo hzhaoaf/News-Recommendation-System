@@ -17,4 +17,7 @@ REC_RESULT = DATA_PATH + 'recommend.pickle'
 COMMIT_RESULT_PATH = DATA_PATH + 'result.csv'
 IMPROVE_SIMILARITY_PATH = DATA_PATH + 'i2i_similarity.pickle'
 
-FINAL_DATA = DATA_PATH + 'final.csv'
+
+
+FM_DATA = DATA_PATH + 'FM/'
+FM_RECOMMEND_WITH_SCORE = FM_DATA + 'rec_with_score.pickle'

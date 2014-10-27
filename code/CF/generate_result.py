@@ -19,10 +19,11 @@ with open(O2I_PATH, 'r') as f:
 M_USERs = len(o2u_dic.items())
 N_NEWs = len(o2i_dic.items())
 
-with open(REC_RESULT, 'r') as f:
+with open(FM_RECOMMEND_WITH_SCORE, 'r') as f:
     recommends = cPickle.load(f)
 
 #每个用户推荐 几个？
+FINAL_DATA = DATA_PATH + 'libfm2.csv'
 K_RECOMMEND = 2 
 with open(FINAL_DATA, 'w') as f:
     for i in range(len(recommends)):

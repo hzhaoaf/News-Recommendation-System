@@ -9,9 +9,11 @@
 
 3.python tf_idf.py 运行此模块生成文章的tfidf值。输入两个参数: 1中消重后的文章合集路径，tfidf的输出结果目录；每篇文章的tfidf值保存在此目录下，以文章newsid命名
 
-4.python generate_user_keywords_by_tfidf.py 此模块根据每篇文章的tfidf值取出TopN的关键词，结合用户的阅读历史，生成用户的兴趣关键词;
+4.generate_user_profile.py 可以得到用户浏览过的newid， 生成user reading list，in the format as "uid:len(newsids):news1,news2..."
 
-5.接下来就可以进行推荐:
+5.python generate_user_keywords_by_tfidf.py 此模块根据每篇文章的tfidf值取出TopN的关键词，结合用户的阅读历史，生成用户的兴趣关键词;
+
+6.接下来就可以进行推荐:
 	
 	1.	python filter_recommend_candidates.py 这个模块用来为每个用户选择推荐的candidate文章；选择规则为每个用户最后的阅读时间的前一天，后3天时间范围的文章；
 	2.	根据1中filter的文章，利用文章的关键词（tfidf）和用户的关键词进行相似度计算，选择cosine距离，返回相似度最高的top 3作为最终的推荐结果；

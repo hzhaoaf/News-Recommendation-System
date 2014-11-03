@@ -33,7 +33,7 @@ def generate_copurs_from_file(corpus_path):
     line = f.readline()
     corpus, newsids = [], []
     while line:
-        parts = line.split('\t\t')
+        parts = line.split('\t')
         corpus.append(parts[4])
         newsids.append(parts[1].strip())
         line = f.readline()
@@ -63,7 +63,7 @@ def generate_tfidf(corpus_path, tfidf_dir):
         fw.close()
 
 if __name__ == '__main__':
-    from config import corpus_path, tfidf_dir
-    generate_tfidf(corpus_path, tfidf_dir)
+    from config import corpus_path, news_tfidf_dir
+    generate_tfidf(corpus_path, news_tfidf_dir)
 
 

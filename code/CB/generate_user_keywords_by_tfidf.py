@@ -4,7 +4,7 @@
 '''
 import os
 
-from config import tfidf_dir, user_keywords_by_tfidf, user_read_list_path
+from config import news_tfidf_dir, user_keywords_by_tfidf, user_read_list_path
 
 from util import unicode2str
 from user_util import generate_uid2newsids_map
@@ -15,7 +15,7 @@ def get_terms_weights(newsid):
         从保存的文章tfidf中读取该newsid的全部term的tfidf值，文件名就是newsid
         有的newsid最终没有生成tfidf文件，这个时候返回空dict
     '''
-    weight_file = tfidf_dir + newsid
+    weight_file = news_tfidf_dir + newsid
     if not os.path.isfile(weight_file):
         return {}
     lines = open(weight_file, 'r').readlines()

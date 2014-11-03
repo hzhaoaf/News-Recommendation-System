@@ -31,7 +31,7 @@ def generate_newsid2pubtime(corpus_file):
     f = open(corpus_file, 'r')
     line = f.readline()
     while line:
-        parts = line.strip().split('\t\t')
+        parts = line.strip().split('\t')
         id_ = parts[1].strip()
         pubtime_str = parts[5].strip()
         if pubtime_str.lower() == 'null':

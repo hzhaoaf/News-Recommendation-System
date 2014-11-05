@@ -68,7 +68,7 @@ def run(recommend_res_file, golden_test_file):
 
     rec_items = load_items(recommend_res_file)
     gt_items = set(load_items(golden_test_file))
-    print 'res is(Precision, Recall, F)\n', calculate_F(rec_items, gt_items)
+    print 'res is(Precision, Recall, F):\n       %.3f, %.3f, %.3f' % calculate_F(rec_items, gt_items)
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:

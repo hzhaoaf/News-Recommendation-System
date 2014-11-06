@@ -52,7 +52,7 @@ def genereate_user_newest_readtime(train_data_path):
     '''
         从训练集中获取用户阅读文章的全部时间，返回最大的时间，以时间戳形式返回
     '''
-    print 'run genereate_user_newest_time...'
+    print 'run genereate_user_newest_readtime...'
     uid2readtime = {}
     f = open(train_data_path, 'r')
     line = f.readline()

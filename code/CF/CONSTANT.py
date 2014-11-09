@@ -21,3 +21,5 @@ IMPROVE_SIMILARITY_PATH = DATA_PATH + 'i2i_similarity.pickle'
 
 FM_DATA = DATA_PATH + 'FM/'
 FM_RECOMMEND_WITH_SCORE = FM_DATA + 'rec_with_score.pickle'
+
+HOT_NEWS = DATA_PATH + 'user_candidate_hot_news.txt'

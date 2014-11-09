@@ -5,3 +5,7 @@ data/
 .pyc
 .idea/
 *.pyc
+
+*.sublime-project
+
+*.sublime-workspace

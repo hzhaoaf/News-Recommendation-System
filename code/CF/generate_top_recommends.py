@@ -26,7 +26,7 @@ with open(IMPROVE_SIMILARITY_PATH, 'r') as f:
     i2i_matrix = cPickle.load(f)
 
 #def __init__(self, i2i_mat, clk_mat, k_nearest_item=100, l_top_rec=10):
-ibcf = IBCFilter(i2i_matrix,clk_matrix,k_nearest_item=30,l_top_rec=5)
+ibcf = IBCFilter(i2i_matrix, clk_matrix, k_nearest_item=30, l_top_rec=15)
 ibcf.start_cf()
 
 with open(REC_RESULT, 'wb') as f:

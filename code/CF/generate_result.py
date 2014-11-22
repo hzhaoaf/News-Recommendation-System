@@ -13,9 +13,14 @@ import cPickle
 
 
 #加入每个user最后一条阅读附近的热门新闻
+
+#每个用户,包含几个，推荐 几个？
+M_INCLUDE = 15
+K_RECOMMEND = 3
+NUM_HOTS = 30
+
 users_nearby_hots_dic = defaultdict(set)
 
-NUM_HOTS = 40
 with open(HOT_NEWS, 'r') as f:
     for line in f.readlines():
         items = line[:-1].split(":")
@@ -36,9 +41,7 @@ N_NEWs = len(o2i_dic.items())
 with open(REC_RESULT, 'r') as f:
     recommends = cPickle.load(f)
 
-#每个用户,包含几个，推荐 几个？
-M_INCLUDE = 10
-K_RECOMMEND = 4
+
 FINAL_DATA = DATA_PATH + 'hot_news.csv'
 with open(FINAL_DATA, 'w') as f:
     for i in range(len(recommends)):
@@ -52,6 +55,13 @@ with open(FINAL_DATA, 'w') as f:
             if item_id in candi_set:
                 cnt_cand += 1
                 f.write(str(user_id) + ',' + str(item_id) + "\n")
+
+        #如果没有 在热门内，那么用cf最靠前的两个
+        if cnt_cand == 0:
+            for j in range(2):
+                item_id = o2i_dic[recommends[i][j][1]]
+                f.write(str(user_id) + ',' + str(item_id) + "\n")
+
             #[(0.12532051282051279, 2680), (0.11757917337627483, 2681), (0.09198717948717948, 6179)]
 
 

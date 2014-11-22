@@ -1,19 +1,11 @@
 Improved Crab
 ===
 
-###类
 
-####[1]cf_recommender
-包含了
-1)UBCFilter 基于用户的CF（没有用上）
-2)IBCFilter 基于物品的CF
+1. 设置好CONSTANT中的输入、输出
+2. 直接运行workflow.py
 
-####[2]improved_item_similarity
-包含了
-ImprovedItemSimilarity
-是基于crab中的ItemSimilarity改进的计算I2I相似度的，原始的写法复杂度太高
-
-###执行脚本
+workflow包含四个执行脚本（为方便直接写成函数了）
 
 ####[1]generate_translate_dic
 
@@ -45,6 +37,17 @@ ImprovedItemSimilarity
 
 结合热门新闻，给出每个用户最终的推荐结果
 
+##类
+
+####[1]cf_recommender
+包含了
+1)UBCFilter 基于用户的CF（没有用上）
+2)IBCFilter 基于物品的CF
+
+####[2]improved_item_similarity
+包含了
+ImprovedItemSimilarity
+是基于crab中的ItemSimilarity改进的计算I2I相似度的，原始的写法复杂度太高
 
 ###改进的地方(待续)
 

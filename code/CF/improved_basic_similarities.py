@@ -13,6 +13,7 @@ class ImprovedItemSimilarity(BaseSimilarity):
     """
 
     def __init__(self, model, distance, num_best=None):
+        print "建立相似度计算模型，请稍候……"
         BaseSimilarity.__init__(self, model, distance, num_best)
         n = len(model.item_ids())
         self.similar_matrix = [[0 for _ in range(n)] for _ in range(n)]
@@ -32,7 +33,7 @@ class ImprovedItemSimilarity(BaseSimilarity):
             item_orders[i] = int(item_orders[i])
         n = len(item_orders)
         for i in range(n):
-            print item_orders[i]
+            print "计算完成第%d个item与其它item的相似度" % item_orders[i]
             for j in range(i+1, n):#（对角线熵都是0，自身和自身相比相似度为0）
                 tmp = self.__pre_get_similarity(item_orders[i], item_orders[j])
                 self.similar_matrix[item_orders[i]][item_orders[j]] = tmp

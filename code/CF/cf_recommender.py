@@ -112,7 +112,7 @@ class IBCFilter:
         找到与用户u最相似的K个用户，根据相似性对每一篇文章进行加权求和
         """
         for user_order in range(self.__M_USERS):
-            print(user_order)
+            print "用户" , user_order , "完成 CF 计算"
             news_ratings = [0 for _ in range(self.__N_NEWS)]
             cur_read = self.__clk_matrix[user_order]
             total_read = 0
@@ -132,5 +132,4 @@ class IBCFilter:
                 news_ratings[i] = 1.0 * news_ratings[i] / total_read
 
             top = get_top_l(news_ratings, self.__L_TOP)
-            print(top)
             self.result.append(top)

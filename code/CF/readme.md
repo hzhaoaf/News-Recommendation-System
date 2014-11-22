@@ -1,10 +1,10 @@
-Improved Crab
+How
 ===
-
-
 1. 设置好CONSTANT中的输入、输出
 2. 直接运行workflow.py
 
+###Details
+===
 workflow包含四个执行脚本（为方便直接写成函数了）
 
 ####[1]generate_translate_dic
@@ -36,6 +36,8 @@ workflow包含四个执行脚本（为方便直接写成函数了）
 ####[4]generate_result
 
 结合热门新闻，给出每个用户最终的推荐结果
+
+===
 
 ##类
 

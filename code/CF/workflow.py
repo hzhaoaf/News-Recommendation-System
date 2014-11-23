@@ -10,6 +10,7 @@ from generate_result import generate_result
 """使用CF计算的整体流程，请每行分别执行"""
 """在CONSTANT里面设置好相应的输入文件路径"""
 #输入输出定义在CONSTANS，输入包括 data.txt文件和user_candidate_hot_news.txt
+data文件第一行需要加一个注释，代码都是从第二行开始读取的。
 #最终的输出是final_result.csv
 
 #[1]generate_translate_dic 读取文件，生成user<->order 和 news<->order 双向翻译字典 序列化到文件里

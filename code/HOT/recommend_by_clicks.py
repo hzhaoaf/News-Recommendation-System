@@ -133,6 +133,7 @@ def recommend_hot_news():
         from_, to_ = get_user_recommend_timerange(latest_read_time)
         real_clicked_nid = uid2nid.get(uid, '0')
         rec_news = get_hot_news_by_timerange(from_, to_, news_info, nid2clicks, read_nids, real_clicked_nid, retNum=REC_NUM)
+        [rec_res.append((uid, nid)) for nid in rec_news]
 
     filename = 'rec_hot_news_top%d.csv' % REC_NUM
     fw = open(filename, 'w+')
